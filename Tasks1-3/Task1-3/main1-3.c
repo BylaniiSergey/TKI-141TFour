@@ -1,20 +1,21 @@
 # include <stdio.h>
 # include <locale.h>
 # include <stdlib.h>
+# include <errno.h>
 
 
 /**
-* @brief Функция для проверки ввода сил тока
-* @param res - количесвто аргументов
+* @brief Функция проверяет и принимает знпчения
+* @return Значение
 */
-void def_I(int res);
+double get_value_I();
 
 
 /**
-* @brief Функция для проверки ввода напряжения
-* @param res - количесвто аргументов
+* @brief Функция проверяет и принимает знпчения
+* @return Значение
 */
-void def_U(int res);
+double get_value_U();
 
 
 /**
@@ -29,7 +30,7 @@ double def_A(double I, double U, double t);
 
 /**
 * @brief Точка входа в программу
-* @return 0 в случае успеха
+* @return Возврящает 0, если программа работает верно, иначе 1
 */
 int main()
 {
@@ -39,35 +40,40 @@ int main()
 	printf("Введите силу тока в электродвигателе вентилятора (I): ");
 	double I;
 	res = scanf_s("%lf", &I);
-	def_I(res);
 	printf("Введите напряжение в электродвигателе вентилятора (U): ");
 	double U;
 	res = scanf_s("%lf", &U);
-	def_I(res);
 	double A = def_A(I, U, t);
 	printf("Работа в электродвигателе вентилятора: %lf", A);
 	return 0;
 }
 
 
-void def_I(res)
+double get_value_I()
 {
+	double I;
+	int res = scanf_s("% lf", &I);
 	if (res != 1)
 	{
-		printf("%s", "Введено неверное значение");
+		errno = EIO;
+		perror("Wrong value");
 		abort();
 	}
+	return I;
 }
 
 
-void def_U(res)
+double get_value_U()
 {
 	double U;
+	int res = scanf_s("% lf", &U);
 	if (res != 1)
 	{
-		printf("%s", "Введено неверное значение");
+		errno = EIO;
+		perror("Wrong value");
 		abort();
 	}
+	return U;
 }
 
 
