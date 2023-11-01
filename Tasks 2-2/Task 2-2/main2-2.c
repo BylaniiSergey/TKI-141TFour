@@ -7,7 +7,6 @@
 /**
  * @brief Функция расчитывающая значение y при x < 2.
  * @param x Входная величина.
- * @param a Входная величина.
  * @return Значение функции.
  */
 double get_y_1(double x);
@@ -15,7 +14,6 @@ double get_y_1(double x);
 /**
  * @brief Функция расчитывающая значение y при x >= 2.
  * @param x Входная величина.
- * @param a Входная величина.
  * @return Значение функции.
  */
 double get_y_2(double x);
@@ -33,7 +31,6 @@ double get_value();
 int main()
 {
     double x;
-    const double a = 2.3;
     puts("Enter x: ");
     x = get_value();
     double result = 0;
