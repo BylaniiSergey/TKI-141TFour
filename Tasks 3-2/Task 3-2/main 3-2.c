@@ -1,21 +1,44 @@
-#include<stdio.h>
-#include<math.h>
-#include <stdlib.h>	
+#include <stdio.h>
+#include <locale.h>
 #include <errno.h>
+#include <math.h>
+#include <float.h>
+#include <stdlib.h>
 
-/**	
- * @brief Формула для расчета факториала	
- * @param x - число от которого факториал должен быть посчитан
- * @return факториал
- */
-double factorial(double x);	
-
-/**	
-* @brief Функция принимающая и проверяющая значение на ввод
-* @param message - текст сообщения для пользователя
-* @return Значение
+/**
+* @brief Функция считывающая количество членов последовательности
+* @remarks Экстренное завершение программы, в случае неправильного ввода
+* @return Количество членов последовательности
 */
-double get_value(const char* message);
+int get_count();
+
+/**
+* @brief Функция считывающая точность вычисления суммы последовательности
+* @remarks Экстренное завершение программы, в случае неправильного ввода
+* @return Точность вычисления суммы последовательности
+*/
+double get_epsilon();
+
+/**
+* @brief Функция расчитывающая сумму членов последовательности
+* @param count - количество членов последовательности
+* @return Сумма последовательности
+*/
+double get_count_sum(int count);
+
+/**
+* @brief Функция расчитывающая сумму членов последовательности
+* @param epsilon - точность вычисления суммы последовательности
+* @return Сумма последовательности
+*/
+double get_epsilon_sum(double epsilon);
+
+/**
+* @brief Функция расчитывающая рекурентный член последовательности
+* @param k - номер члена последовательности
+* @return Значение рекурентного члена последовательности
+*/
+double get_recurrent(int k);
 
 /**
 *@brief Точка входа в программу
@@ -23,38 +46,80 @@ double get_value(const char* message);
 */
 int main()
 {
-    double n, answ;	
-    answ = 0;
-    n = get_value("Enter n: ");	 
-    for (int k = 1; k <= n; k++)
-    {
-        answ = answ + (pow(k, 4) / (factorial(k)));	        
-    }
-    printf("%lf\n", answ);
+	setlocale(LC_ALL, "RU");
+
+	puts("Введите количество членов последовательности:");
+	int count = get_count();
+	double count_sum = get_count_sum(count);
+	printf_s("Суммы %d членов последовательности: %.20lf \n", count, count_sum);
+
+	puts("Введите точность вычисления суммы последовательности:");
+	double epsilon = get_epsilon();
+	double epsilon_sum = get_epsilon_sum(epsilon);
+	printf_s("Суммы членов последовательности с заданной точностью равна: %.20lf", epsilon_sum);
+
+	return EXIT_SUCCESS;
 }
 
-double factorial(double x)	
+int get_count()
 {
-    if (x < 2)	
-    {
-        return 1;	       
-    }
-    else	    
-    {
-        return ((pow(x, 3)+(3*pow(x,2))+(3*x)+1)/pow(x,4));
-    }
+	int count;
+	int result = scanf_s("%d", &count);
+
+	if (result != 1 || count <= 1)
+	{
+		errno = EIO;
+		perror("Ошибка ввода");
+		abort();
+	}
+
+	return count;
 }
 
-double get_value(const char* message)
+double get_epsilon()
 {
-    double a;	 
-    printf("%s", message);	    
-    int res = scanf_s("%lf", &a);	    
-    if (res != 1)	   
-    {
-        errno = EIO;	        
-        perror("Wrong value");	        
-        abort();	       
-    }
-    return a;	
+	double epsilon;
+	int result = scanf_s("%lf", &epsilon);
+
+	if (result != 1 || epsilon >= DBL_MIN)
+	{
+		errno = EIO;
+		perror("Ошибка ввода");
+		abort();
+	}
+
+	return epsilon;
+}
+
+double get_count_sum(int count)
+{
+	double current = 1.0;
+	double sum = current;
+	for (int k = 1; k < count; k++)
+	{
+		current *= get_recurrent(k);
+		sum += current;
+	}
+	return sum;
+}
+
+double get_epsilon_sum(double epsilon)
+{
+	double current = 1.0;
+	double sum = current;
+	int k = 1;
+
+	while (sum < epsilon)
+	{
+		current *= get_recurrent(k);
+		sum += current;
+		k++;
+	}
+
+	return sum;
+}
+
+double get_recurrent(int k)
+{
+	return pow(k + 1, 3) / pow(k, 4);
 }
