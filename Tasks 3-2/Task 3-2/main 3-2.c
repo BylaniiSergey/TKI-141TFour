@@ -121,5 +121,5 @@ double get_epsilon_sum(double epsilon)
 
 double get_recurrent(int k)
 {
-	return pow(k + 1, 3) / pow(k, 4);
+	return ((-1) ^ k) * (pow(k + 1, 3) / pow(k, 4));
 }
