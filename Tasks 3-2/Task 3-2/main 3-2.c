@@ -106,13 +106,13 @@ double get_count_sum(int count)
 double get_epsilon_sum(double epsilon)
 {
 	double current = 1.0;
-	double sum = current;
+	double sum = 0;
 	int k = 1;
 
-	while (sum < epsilon)
+	while (current < epsilon)
 	{
 		current *= get_recurrent(k);
-		sum += current;
+		current += sum;
 		k++;
 	}
 
