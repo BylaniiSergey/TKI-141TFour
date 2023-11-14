@@ -78,7 +78,7 @@ double get_value(const char* message)
 	double a;
 	printf("%s", message);
 	int res = scanf_s("%lf", &a);
-	if (res != 1 || a < 0)
+	if (res != 1 || a <= 0)
 	{
 		errno = EIO;
 		perror("Wrong value");
