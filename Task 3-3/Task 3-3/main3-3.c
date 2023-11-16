@@ -52,11 +52,11 @@ double summ(double x, double e)
 {
 	double sum = 0;
 	int i = 1;
-	double s_i = (x*(pow(x,5)/5) * i / (i + 1));
+	double s_i = (4*i*pow(x,4)+pow(x,4))/(4*i+5);
 	sum += s_i;
 	for (int i = 2; s_i > e; i++)
 	{
-		s_i += (x * (pow(x, 5) / 5) * i / (i + 1));
+		s_i += (4 * i * pow(x, 4) + pow(x, 4)) / (4 * i + 5);
 		sum += s_i;
 	}
 	return sum;
