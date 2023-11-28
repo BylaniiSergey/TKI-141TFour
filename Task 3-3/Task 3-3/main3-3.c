@@ -4,6 +4,8 @@
 #include <float.h>
 #include <errno.h>
 #include <locale.h>
+#include <stdbool.h>
+
 
 /**
 * @brief Функция принимающая и проверяющая значение на ввод
@@ -42,11 +44,18 @@ double get_s_i(double i, double x);
 double summ(double x);
 
 /**
- * @brief Функция проверяющая что a>b 
- * @param a - число
- * @param b - число
+ * @brief Функция проверяющая что x_finish>x_start
+ * @param x_start - число
+ * @param x_finish - число
  */
-void check_range(double a, double b);
+void check_range(double x_start, double x_finish);
+
+/**
+ * @brief Функция проверяющая что x_finish>x_start
+ * @param x_start - число
+ * @param x_finish - число
+ */
+bool OOF(double x);
 
 /**
 * @brief Точка входа в программу
@@ -55,20 +64,24 @@ void check_range(double a, double b);
 int main()
 {
 	setlocale(LC_ALL, "RU");
-	double a = get_value("Введите(a) : ");
-	double x = a;
-	double b = get_value("Введите(b) : ");
+	double x_start = get_value("Введите(x_start) : ");
+	double x_finish = get_value("Введите(x_finish) : ");
 	double step = get_step("Enter step: ");
-	double e = pow(30, -5);
-	for (double i = a; i - b <= DBL_EPSILON; i += step)
+	for (double x = x_start; x - x_finish <= DBL_EPSILON; x += step)
 	{
-		printf("%lf\t%lf\t%lf\t\n", i, function(i), summ(i, e));
+		printf("%lf\t%lf\t%lf\t\n", x, function(x), summ(x));
 	}
 	return 0;
 }
 
 double function(double x)
 {
+	if (OOF == false)
+	{
+		errno = EIO;
+		perror("при этом x нет решений");
+		abort();
+	}
 	return (1 / 4) * log((1 + x) / (1 - x)) + (1 / 2) * atan(x);
 }
 
@@ -81,7 +94,7 @@ double summ(double x)
 {
 	double sum = 0;
 	sum += 0;
-	for (int i = 0; function(x) - sum <= DBL_EPSILON; i++)
+	for (int i = 0; fabs(function(x) - sum) <= DBL_EPSILON; i++)
 	{
 		sum += get_s_i(i, x);
 	}
@@ -90,38 +103,47 @@ double summ(double x)
 
 double get_step(const char* message)
 {
-	double a;
+	double x_start;
 	printf("%s", message);
-	int res = scanf_s("%lf", &a);
-	if (res != 1 || a <= 0)
+	int res = scanf_s("%lf", &x_start);
+	if (res != 1)
 	{
 		errno = EIO;
 		perror("Wrong value");
 		abort();
 	}
-	return a;
+	return x_start;
 }
 
 double get_value(const char* message)
 {
-	double b;
+	double x_finish;
 	printf("%s", message);
-	int res = scanf_s("%lf", &b);
-	if (res != 1 || b <= 0)
+	int res = scanf_s("%lf", &x_finish);
+	if (res != 1)
 	{
 		errno = EIO;
 		perror("Wrong value");
 		abort();
 	}
-	return b;
+	return x_finish;
 }
 
-void check_range(double a, double b)
+void check_range(double x_start, double x_finish, double step)
 {
-	if (a > b)
+	if ((x_start > x_finish - DBL_EPSILON) && step > 0)
 	{
 		errno = EIO;
 		perror("ERROR");
 		abort();
 	}
+}
+
+bool OOF(double x)
+{
+	if (x != 1 && x < -1)
+	{
+		return true;
+	}
+	return false;
 }
