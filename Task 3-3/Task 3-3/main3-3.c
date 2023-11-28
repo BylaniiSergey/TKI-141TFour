@@ -35,11 +35,18 @@ double function(double x);
 double get_s_i(double i, double x);
 
 /**
- * @brief Функция возвращающая значение суммы ряда в этой точке.
- * @param x - точка.
- * @return Значение суммы ряда в точке x.
+ * @brief Функция возвращающая значение суммы ряда в этой точке
+ * @param x - точка
+ * @return Значение суммы ряда в точке x
  */
-double summ(double x, double e);
+double summ(double x);
+
+/**
+ * @brief Функция проверяющая что a>b 
+ * @param a - число
+ * @param b - число
+ */
+void check_range(double a, double b);
 
 /**
 * @brief Точка входа в программу
