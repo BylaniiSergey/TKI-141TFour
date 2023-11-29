@@ -58,7 +58,7 @@ int fill_random(const size_t size, int* array);
 * @param size - размер массива
 * @param array - массив
 */
-int print_array(const size_t size, const int* array);
+void print_array(const size_t size, const int* array);
 
 /**
 * @brief Функция принимающая и проверяющая значение на ввод
@@ -68,7 +68,15 @@ int print_array(const size_t size, const int* array);
 int get_value(const char* message);
 
 /**
-* @brief Функция заполняющая массив рандомными числами
+* @brief Функция проверяющая массив есть ли пара соседних элементов с суммой, равной заданному числу
+* @param size - размер массива
+* @param array - массив
+* @param checkSum - сумма которой равны два соседних элемента
+*/
+bool is_coulple_sum(const size_t size, const int* array, int checkSum);
+
+/**
+* @brief Функция печатает есть ли пары массива 
 * @param size - размер массива
 * @param array - массив
 * @param checkSum - сумма которой равны два соседних элемента
@@ -107,13 +115,9 @@ int main()
 
     puts("Исходный массив: \n");
     print_array(size, arr);
-
-    size_t k = get_size("Введите k: ");
-    int* arr_1 = replace_last_k(arr, size, k);
-    print_array(size, arr_1);
+    print_array(size, replace_last_k(arr, size, k));
     print_indexes_3(arr, size);
 
-    int checkSum = get_value("Введите сумму элементов: ");
     print_couples(size, arr, checkSum);
 
     return 0;
@@ -127,6 +131,8 @@ void names_of_random_and_keyboard()
 
 int* replace_last_k(const int* const arr, size_t size, size_t k)
 {
+    size_t k = get_size("Введите k: ");
+    int* arr_1 = replace_last_k(arr, size, k);
     int* arr_k = init_array(size);
     memcpy(arr_k, arr, size * sizeof(int));
     for (size_t i = size - k; i < size; ++i)
@@ -153,6 +159,7 @@ int* init_array(const size_t size)
     if (arr == NULL)
     {
         perror("Неудалось выделить память под массив!\n");
+        abort();
     }
     return arr;
 }
@@ -171,6 +178,7 @@ void fill_array(const size_t size, int* array)
         break;
     default:
         perror("Неверный выбор!\n");
+        abort();
     }
 }
 
@@ -211,13 +219,12 @@ int fill_random(const size_t size, int* array)
     return 1;
 }
 
-int print_array(const size_t size, const int* array)
+void print_array(const size_t size, const int* array)
 {
     for (size_t i = 0; i < size; i++)
     {
         printf_s("%Iu\t%d\n", i, array[i]);
     }
-    return 1;
 }
 
 int get_value(const char* message)
@@ -247,21 +254,27 @@ void print_indexes_3(const int* const arr, size_t size)
     puts("\n");
 }
 
-void print_couples(const size_t size, const int* array, int checkSum)
+bool is_coulple_sum(const size_t size, const int* array, int checkSum)
 {
-    puts("Пары соседних элементов с суммой, равной заданному числу:\n");
-    bool isCoupleSum = false;
     for (size_t i = 0; i < size - 1; i++)
     {
         int current = array[i];
         int next = array[i + 1];
         if (current + next == checkSum)
         {
-            isCoupleSum = true;
-            printf_s("%d %d\n", current, next);
+            return true;
         }
     }
-    if (!isCoupleSum)
+    return false;
+}
+
+void print_couples(const size_t size, const int* array, int checkSum)
+{
+    if (is_couple_sum(size, array, checkSum)) 
+    {
+        puts("Присутствуют\n")
+    }
+    else 
     {
         puts("Отсутствуют\n");
     }
