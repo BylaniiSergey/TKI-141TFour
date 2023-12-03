@@ -88,6 +88,9 @@ void print_couples(const size_t size, const int* array, int checkSum);
 */
 void names_of_random_and_keyboard();
 
+/**
+* @brief Пользовательский ввод
+*/
 enum random_or_keybord
 {
     Keyboard = 1,
