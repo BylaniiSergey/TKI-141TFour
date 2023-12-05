@@ -9,12 +9,12 @@
 #include <locale.h>
 
 /**
-* @brief Функция выводит вариант выбора: Клавиатура или Рандом
+* @brief Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґРёС‚ РІР°СЂРёР°РЅС‚ РІС‹Р±РѕСЂР°: РљР»Р°РІРёР°С‚СѓСЂР° РёР»Рё Р Р°РЅРґРѕРј
 */
 void names_of_random_and_keyboard();
 
 /**
-* @brief Пользовательский ввод
+* @brief РџРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РІРІРѕРґ
 */
 enum random_or_keybord
 {
@@ -23,116 +23,116 @@ enum random_or_keybord
 };
 
 /**
-* @brief Функция принимающая и проверяющая значение размера на ввод
-* @param message - текст сообщения для пользователя
-* @return Значение размера
+* @brief Р¤СѓРЅРєС†РёСЏ РїСЂРёРЅРёРјР°СЋС‰Р°СЏ Рё РїСЂРѕРІРµСЂСЏСЋС‰Р°СЏ Р·РЅР°С‡РµРЅРёРµ СЂР°Р·РјРµСЂР° РЅР° РІРІРѕРґ
+* @param message - С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+* @return Р—РЅР°С‡РµРЅРёРµ СЂР°Р·РјРµСЂР°
 */
 size_t get_size(char const* message);
 
 /**
-* @brief Функция выделяющая память под массив
-* @param size - размер массива
-* @return Массив
+* @brief Р¤СѓРЅРєС†РёСЏ РІС‹РґРµР»СЏСЋС‰Р°СЏ РїР°РјСЏС‚СЊ РїРѕРґ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+* @return РњР°СЃСЃРёРІ
 */
 int* init_array(const size_t size);
 
 /**
-* @brief Функция запалняет массив случайными числами или числами с клавиатуры в зависимости от выбора пользователя
-* @param size - размер массива
-* @param array - массив
+* @brief Р¤СѓРЅРєС†РёСЏ Р·Р°РїР°Р»РЅСЏРµС‚ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё РёР»Рё С‡РёСЃР»Р°РјРё СЃ РєР»Р°РІРёР°С‚СѓСЂС‹ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±РѕСЂР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+* @param size - СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+* @param array - РјР°СЃСЃРёРІ
 */
 void fill_array(const size_t size, int* array);
 
 /**
-* @brief Функция считывающая ввод с клавиатуры
-* @param size - размер массива
-* @param array - массив
+* @brief Р¤СѓРЅРєС†РёСЏ СЃС‡РёС‚С‹РІР°СЋС‰Р°СЏ РІРІРѕРґ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+* @param size - СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+* @param array - РјР°СЃСЃРёРІ
 */
 void fill_keyboard(const size_t size, int* array);
 
 /**
-* @brief Функция заполняющая массив рандомными числами
-* @param size - размер массива
-* @param array - массив
-* @return 1 если все хорошо
+* @brief Р¤СѓРЅРєС†РёСЏ Р·Р°РїРѕР»РЅСЏСЋС‰Р°СЏ РјР°СЃСЃРёРІ СЂР°РЅРґРѕРјРЅС‹РјРё С‡РёСЃР»Р°РјРё
+* @param size - СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+* @param array - РјР°СЃСЃРёРІ
+* @return 1 РµСЃР»Рё РІСЃРµ С…РѕСЂРѕС€Рѕ
 */
 int fill_random(const size_t size, int* array);
 
 /**
-* @brief Функция выводящая заполненный массив
-* @param size - размер массива
-* @param array - массив
+* @brief Р¤СѓРЅРєС†РёСЏ РІС‹РІРѕРґСЏС‰Р°СЏ Р·Р°РїРѕР»РЅРµРЅРЅС‹Р№ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°
+* @param array - РјР°СЃСЃРёРІ
 */
 int print_array(const size_t size, const int* array);
 
 /**
-* @brief Функция принимающая и проверяющая значение на ввод
-* @param message - текст сообщения для пользователя
-* @return Значение
+* @brief Р¤СѓРЅРєС†РёСЏ РїСЂРёРЅРёРјР°СЋС‰Р°СЏ Рё РїСЂРѕРІРµСЂСЏСЋС‰Р°СЏ Р·РЅР°С‡РµРЅРёРµ РЅР° РІРІРѕРґ
+* @param message - С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+* @return Р—РЅР°С‡РµРЅРёРµ
 */
 int get_value(const char* message);
 
 /**
-* @brief Функция заменяющая первый отрицательный элемент нулём
-* @param array - целочисленный массив
-* @param size - размер
-* @return Возвращает изменёный массив
+* @brief Р¤СѓРЅРєС†РёСЏ Р·Р°РјРµРЅСЏСЋС‰Р°СЏ РїРµСЂРІС‹Р№ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РЅСѓР»С‘Рј
+* @param array - С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ
+* @return Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР·РјРµРЅС‘РЅС‹Р№ РјР°СЃСЃРёРІ
 */
 int* replace_first_negative(const int* const array, size_t size);
 
 /**
-* @brief Функция вставляющающая k после всех элементов кратную своему номеру
-* @param array - целочисленный массив
-* @param size - размер
-* @param k - элемен
-* @return Возвращает изменёный массив
+* @brief Р¤СѓРЅРєС†РёСЏ РІСЃС‚Р°РІР»СЏСЋС‰Р°СЋС‰Р°СЏ k РїРѕСЃР»Рµ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РєСЂР°С‚РЅСѓСЋ СЃРІРѕРµРјСѓ РЅРѕРјРµСЂСѓ
+* @param array - С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ
+* @param k - СЌР»РµРјРµРЅ
+* @return Р’РѕР·РІСЂР°С‰Р°РµС‚ РёР·РјРµРЅС‘РЅС‹Р№ РјР°СЃСЃРёРІ
 */
 int* insert_k(const int* const array, size_t size, int k);
 
 /**
-* @brief Функция ищет индекс последнего элемента кратного своему номеру
-* @param array - целочисленный массив
-* @param size - размер
-* @return Возвращает индекс
+* @brief Р¤СѓРЅРєС†РёСЏ РёС‰РµС‚ РёРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РєСЂР°С‚РЅРѕРіРѕ СЃРІРѕРµРјСѓ РЅРѕРјРµСЂСѓ
+* @param array - С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ
+* @return Р’РѕР·РІСЂР°С‰Р°РµС‚ РёРЅРґРµРєСЃ
 */
 size_t find_index_last_divisible(const int* const array, size_t size);
 
 /**
-* @brief Функция формирует массив из исходного по условию 3 задания
-* @param array - целочисленный массив
-* @param size - размер
-* @return Возвращает новый массив A
+* @brief Р¤СѓРЅРєС†РёСЏ С„РѕСЂРјРёСЂСѓРµС‚ РјР°СЃСЃРёРІ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РїРѕ СѓСЃР»РѕРІРёСЋ 3 Р·Р°РґР°РЅРёСЏ
+* @param array - С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РјР°СЃСЃРёРІ
+* @param size - СЂР°Р·РјРµСЂ
+* @return Р’РѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ A
 */
 int* get_array_A(const int* const array, size_t size);
 
 /**
-* @brief Точка входа в программу
-* @return Возврящает 0, если программа работает верно, иначе 1
+* @brief РўРѕС‡РєР° РІС…РѕРґР° РІ РїСЂРѕРіСЂР°РјРјСѓ
+* @return Р’РѕР·РІСЂСЏС‰Р°РµС‚ 0, РµСЃР»Рё РїСЂРѕРіСЂР°РјРјР° СЂР°Р±РѕС‚Р°РµС‚ РІРµСЂРЅРѕ, РёРЅР°С‡Рµ 1
 */
 int main()
 {
 	setlocale(LC_ALL, "RU");
 
-	size_t size = get_size("Введите размер массива: ");
+	size_t size = get_size("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
 
 	int* array = init_array(size);
 	fill_array(size, array);
 
-	puts("Исходный массив:\n");
+	puts("РСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ:\n");
 	print_array(size, array);
 	int* array_with_replaced_first_negative = replace_first_negative(array, size);
 
-	puts("Массив с заменённым первым отрицательным элементом на 0:\n");
+	puts("РњР°СЃСЃРёРІ СЃ Р·Р°РјРµРЅС‘РЅРЅС‹Рј РїРµСЂРІС‹Рј РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј РЅР° 0:\n");
 	print_array(size, array_with_replaced_first_negative);
 
-	int k = get_value("Введите k: ");
+	int k = get_value("Р’РІРµРґРёС‚Рµ k: ");
 	int* array_with_inserted_k = insert_k(array, size, k);
 
-	puts("Массив со вставленным числом после элементов, кратных своему номеру (начиная с 1):\n");
+	puts("РњР°СЃСЃРёРІ СЃРѕ РІСЃС‚Р°РІР»РµРЅРЅС‹Рј С‡РёСЃР»РѕРј РїРѕСЃР»Рµ СЌР»РµРјРµРЅС‚РѕРІ, РєСЂР°С‚РЅС‹С… СЃРІРѕРµРјСѓ РЅРѕРјРµСЂСѓ (РЅР°С‡РёРЅР°СЏ СЃ 1):\n");
 	print_array(size + 1, array_with_inserted_k);
 	int* A_array = get_array_A(array, size);
 
-	puts("Массив A, сформированный из исходного массива D по 3-му условию:\n");
+	puts("РњР°СЃСЃРёРІ A, СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РјР°СЃСЃРёРІР° D РїРѕ 3-РјСѓ СѓСЃР»РѕРІРёСЋ:\n");
 	print_array(size, A_array);
 
 	return 0;
@@ -140,15 +140,15 @@ int main()
 
 void names_of_random_and_keyboard()
 {
-	printf_s("Заполнение с клавиатуры - %d\n", (int)Keyboard);
-	printf_s("Случайное заполнение - %d\n", (int)Random);
+	printf_s("Р—Р°РїРѕР»РЅРµРЅРёРµ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹ - %d\n", (int)Keyboard);
+	printf_s("РЎР»СѓС‡Р°Р№РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ - %d\n", (int)Random);
 }
 
 size_t get_size(char const* message)
 {
 	int size = get_value(message);
 	if (size < 0) {
-		perror("Неверный массив!\n");
+		perror("РќРµРІРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ!\n");
 		abort();
 	}
 	return (size_t)size;
@@ -159,17 +159,17 @@ int* init_array(const size_t size)
 	int* arr = malloc(size * sizeof(int));
 	if (arr == NULL)
 	{
-		perror("Невозможно выделить мапять под массив!\n");
+		perror("РќРµРІРѕР·РјРѕР¶РЅРѕ РІС‹РґРµР»РёС‚СЊ РјР°РїСЏС‚СЊ РїРѕРґ РјР°СЃСЃРёРІ!\n");
 	}
 	return arr;
 }
 
 void fill_array(const size_t size, int* array)
 {
-	puts("Как Вы хотите заполнить массив:\n");
+	puts("РљР°Рє Р’С‹ С…РѕС‚РёС‚Рµ Р·Р°РїРѕР»РЅРёС‚СЊ РјР°СЃСЃРёРІ:\n");
 	names_of_random_and_keyboard();
 
-	enum random_or_keybord choice = get_value("Выберите нужный вариант: ");
+	enum random_or_keybord choice = get_value("Р’С‹Р±РµСЂРёС‚Рµ РЅСѓР¶РЅС‹Р№ РІР°СЂРёР°РЅС‚: ");
 	switch (choice)
 	{
 	case Keyboard:
@@ -179,28 +179,28 @@ void fill_array(const size_t size, int* array)
 		fill_random(size, array);
 		break;
 	default:
-		perror("Неверный выбор!!\n");
+		perror("РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ!!\n");
 	}
 }
 
 void fill_keyboard(const size_t size, int* array)
 {
-	const int minimum_limit = get_value("Введите нижнюю границу массива: ");
-	const int maximum_limit = get_value("Введите верхнюю границу массива: ");
+	const int minimum_limit = get_value("Р’РІРµРґРёС‚Рµ РЅРёР¶РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РјР°СЃСЃРёРІР°: ");
+	const int maximum_limit = get_value("Р’РІРµРґРёС‚Рµ РІРµСЂС…РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РјР°СЃСЃРёРІР°: ");
 	if (minimum_limit >= maximum_limit)
 	{
 		errno = EIO;
-		perror("Неверные границы!\n");
+		perror("РќРµРІРµСЂРЅС‹Рµ РіСЂР°РЅРёС†С‹!\n");
 		abort();
 	}
-	puts("Введите массив: ");
+	puts("Р’РІРµРґРёС‚Рµ РјР°СЃСЃРёРІ: ");
 	for (size_t i = 0; i < size; i++)
 	{
 		int c = get_value("");
 		if (c < minimum_limit || c > maximum_limit)
 		{
 			errno = EIO;
-			perror("Ошибка ввода!\n");
+			perror("РћС€РёР±РєР° РІРІРѕРґР°!\n");
 			abort();
 		}
 		array[i] = c;
@@ -209,8 +209,8 @@ void fill_keyboard(const size_t size, int* array)
 
 int fill_random(const size_t size, int* array)
 {
-	const int minimum_limit = get_value("Введите нижнюю границу массива: ");
-	const int maximum_limit = get_value("Введите верхнюю границу массива: ");
+	const int minimum_limit = get_value("Р’РІРµРґРёС‚Рµ РЅРёР¶РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РјР°СЃСЃРёРІР°: ");
+	const int maximum_limit = get_value("Р’РІРµРґРёС‚Рµ РІРµСЂС…РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РјР°СЃСЃРёРІР°: ");
 	unsigned int ttime = time(NULL);
 	srand(ttime);
 	for (size_t i = 0; i < size; i++)
@@ -237,7 +237,7 @@ int get_value(const char* message)
 	if (res != 1)
 	{
 		errno = EIO;
-		perror("Неверное значение\n");
+		perror("РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ\n");
 		abort();
 	}
 	return a;
@@ -273,7 +273,7 @@ size_t find_index_last_divisible(const int* const array, size_t size)
 	}
 	if (!is_divisible_elements)
 	{
-		perror("Нет элементов, кратных своим номерам!\n");
+		perror("РќРµС‚ СЌР»РµРјРµРЅС‚РѕРІ, РєСЂР°С‚РЅС‹С… СЃРІРѕРёРј РЅРѕРјРµСЂР°Рј!\n");
 		abort();
 	}
 	return index;
@@ -285,7 +285,7 @@ int* insert_k(const int* const array, size_t size, int k)
 	size_t last_divisible_index = find_index_last_divisible(array, size);
 	if (last_divisible_index >= size)
 	{
-		perror("Индекс последнего кратного элемента массива больше размера массива!\n");
+		perror("РРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµРіРѕ РєСЂР°С‚РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РјР°СЃСЃРёРІР° Р±РѕР»СЊС€Рµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°!\n");
 		abort();
 	}
 	memcpy(new_array, array, (last_divisible_index + 1) * sizeof(int));
