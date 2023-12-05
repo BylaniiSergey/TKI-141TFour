@@ -19,10 +19,9 @@ void print_indexes_3(const int* const arr, size_t size);
 * @brief Функция находящая последние k элементов массива и заменяющего  их на противоположные
 * @param size - размер массива
 * @param array - массив
-* @param k - кол-во элементов с конца которых надо заменить
 * @return Последние k элементов изменёного массива
 */
-int* replace_last_k(const int* const arr, size_t size, size_t k);
+int* replace_last_k(const int* const arr, size_t size);
 
 /**
 * @brief Функция принимающая и проверяющая значение размера на ввод
@@ -132,12 +131,11 @@ void names_of_random_and_keyboard()
     printf_s("Random - %d\n", (int)Random);
 }
 
-int* replace_last_k(const int* const arr, size_t size, size_t k)
+int* replace_last_k(const int* const arr, size_t size)
 {
     size_t k = get_size("Введите k: ");
     int* arr_1 = replace_last_k(arr, size, k);
-    int* arr_k = init_array(size);
-    memcpy(arr_k, arr, size * sizeof(int));
+    
     for (size_t i = size - k; i < size; ++i)
     {
         arr_k[i] = -arr_k[i];
@@ -275,7 +273,7 @@ void print_couples(const size_t size, const int* array, int checkSum)
 {
     if (is_couple_sum(size, array, checkSum)) 
     {
-        puts("Присутствуют\n")
+        puts("Присутствуют\n");
     }
     else 
     {
