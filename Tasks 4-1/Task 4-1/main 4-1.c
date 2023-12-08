@@ -131,12 +131,11 @@ void names_of_random_and_keyboard()
     printf_s("Random - %d\n", (int)Random);
 }
 
-int* replace_last_k(const int* const arr, size_t size)
+int* replace_last_k(const int* const arr, size_t size, size_t k) 
 {
-    size_t k = get_size("Введите k: ");
-    int* arr_1 = replace_last_k(arr, size, k);
-    
-    for (size_t i = size - k; i < size; ++i)
+    int* arr_k = init_array(size);
+    memcpy(arr_k, arr, size * sizeof(int));
+    for (size_t i = size - k; i < size; ++i) 
     {
         arr_k[i] = -arr_k[i];
     }
