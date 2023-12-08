@@ -167,6 +167,8 @@ int* init_array(const size_t size)
 
 void fill_array(const size_t size, int* array)
 {
+    const int minimum_limit = get_value("Введите нижнюю границу массива: ");
+    const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     puts("Как Вы хотите заполнить массив:\n");
     names_of_random_and_keyboard();
     enum random_or_keybord choice = get_value("Выберите нужный вариант: ");
@@ -209,8 +211,6 @@ void fill_keyboard(const size_t size, int* array)
 
 int fill_random(const size_t size, int* array)
 {
-    const int minimum_limit = get_value("Введите нижнюю границу массива: ");
-    const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     unsigned int ttime = time(NULL);
     srand(ttime);
     for (size_t i = 0; i < size; i++)
