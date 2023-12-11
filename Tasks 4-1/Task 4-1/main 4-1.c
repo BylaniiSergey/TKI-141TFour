@@ -171,7 +171,7 @@ void fill_array(const size_t size, int* array)
     const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     puts("Как Вы хотите заполнить массив:\n");
     names_of_random_and_keyboard();
-    enum random_or_keybord choice = get_value("Выберите нужный вариант: ");
+    enum random_or_keyboard choice = (enum random_or_keyboard)get_value("Введите нужный элемент: ");
     switch (choice) {
     case Keyboard:
         fill_keyboard(size, array, minimum_limit, maximum_limit);
