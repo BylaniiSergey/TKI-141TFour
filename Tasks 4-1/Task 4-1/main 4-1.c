@@ -42,7 +42,7 @@ int* init_array(const size_t size);
 * @param size - размер массива
 * @param array - массив
 */
-void fill_keyboard(const size_t size, int* array);
+void fill_keyboard(const size_t size, int* array, int minimum_limit, int maximum_limit);
 
 /**
 * @brief Функция заполняющая массив рандомными числами
@@ -50,7 +50,7 @@ void fill_keyboard(const size_t size, int* array);
 * @param array - массив
 * @return 1 если все хорошо
 */
-int fill_random(const size_t size, int* array);
+int fill_random(const size_t size, int* array, int minimum_limit, int maximum_limit);
 
 /**
 * @brief Функция выводящая заполненный массив
@@ -80,7 +80,7 @@ bool is_coulple_sum(const size_t size, const int* array, int checkSum);
 * @param array - массив
 * @param checkSum - сумма которой равны два соседних элемента
 */
-void print_couples(const size_t size, const int* array, int checkSum);
+void print_couples(const size_t size, const int* array);
 
 /**
 * @brief Функция выводит вариант выбора: Клавиатура или Рандом
@@ -114,13 +114,14 @@ int main()
     size_t size = get_size("Введите размер массива: ");
     int* arr = init_array(size);
     fill_array(size, arr);
-
+    const int minimum_limit = get_value("Введите нижнюю границу массива: ");
+    const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     puts("Исходный массив: \n");
     print_array(size, arr);
-    print_array(size, replace_last_k(arr, size, k));
+    print_array(size, replace_last_k(arr, size));
     print_indexes_3(arr, size);
 
-    print_couples(size, arr, checkSum);
+    print_couples(size, arr);
 
     return 0;
 }
@@ -131,11 +132,11 @@ void names_of_random_and_keyboard()
     printf_s("Random - %d\n", (int)Random);
 }
 
-int* replace_last_k(const int* const arr, size_t size, size_t k) 
+int* replace_last_k(const int* const arr, size_t size) 
 {
     int* arr_k = init_array(size);
     memcpy(arr_k, arr, size * sizeof(int));
-    for (size_t i = size - k; i < size; ++i) 
+    for (size_t i = size ; i < size; ++i) 
     {
         arr_k[i] = -arr_k[i];
     }
@@ -173,10 +174,10 @@ void fill_array(const size_t size, int* array)
     enum random_or_keybord choice = get_value("Выберите нужный вариант: ");
     switch (choice) {
     case Keyboard:
-        fill_keyboard(size, array);
+        fill_keyboard(size, array, minimum_limit, maximum_limit);
         break;
     case Random:
-        fill_random(size, array);
+        fill_random(size, array, minimum_limit, maximum_limit);
         break;
     default:
         perror("Неверный выбор!\n");
@@ -184,10 +185,8 @@ void fill_array(const size_t size, int* array)
     }
 }
 
-void fill_keyboard(const size_t size, int* array)
+void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_limit)
 {
-    const int minimum_limit = get_value("Введите нижнюю границу массива: ");
-    const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     if (minimum_limit >= maximum_limit)
     {
         errno = EIO;
@@ -208,7 +207,7 @@ void fill_keyboard(const size_t size, int* array)
     }
 }
 
-int fill_random(const size_t size, int* array)
+int fill_random(const size_t size, int* array,int minimum_limit,int maximum_limit)
 {
     unsigned int ttime = time(NULL);
     srand(ttime);
@@ -268,9 +267,9 @@ bool is_coulple_sum(const size_t size, const int* array, int checkSum)
     return false;
 }
 
-void print_couples(const size_t size, const int* array, int checkSum)
+void print_couples(const size_t size, const int* array)
 {
-    if (is_couple_sum(size, array, checkSum)) 
+    if (is_couple_sum(size, array)) 
     {
         puts("Присутствуют\n");
     }
