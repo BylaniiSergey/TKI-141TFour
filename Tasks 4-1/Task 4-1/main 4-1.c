@@ -50,7 +50,7 @@ void fill_keyboard(const size_t size, int* array, int minimum_limit, int maximum
 * @param array - массив
 * @return 1 если все хорошо
 */
-int fill_random(const size_t size, int* array, int minimum_limit, int maximum_limit);
+void fill_random(const size_t size, int* array,int minimum_limit,int maximum_limit);
 
 /**
 * @brief Функция выводящая заполненный массив
@@ -207,7 +207,7 @@ void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_l
     }
 }
 
-int fill_random(const size_t size, int* array,int minimum_limit,int maximum_limit)
+void fill_random(const size_t size, int* array,int minimum_limit,int maximum_limit)
 {
     unsigned int ttime = time(NULL);
     srand(ttime);
@@ -215,7 +215,6 @@ int fill_random(const size_t size, int* array,int minimum_limit,int maximum_limi
     {
         array[i] = minimum_limit + rand() % (maximum_limit - minimum_limit + 1);
     }
-    return 1;
 }
 
 void print_array(const size_t size, const int* array)
