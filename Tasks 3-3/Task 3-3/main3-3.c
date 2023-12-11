@@ -51,13 +51,6 @@ double summ(double x);
 void check_range(double x_start, double x_finish);
 
 /**
- * @brief Функция проверяющая что x_finish>x_start
- * @param x_start - число
- * @param x_finish - число
- */
-bool OOF(double x);
-
-/**
 * @brief Точка входа в программу
 * @return Возврящает 0, если программа работает верно, иначе 1
 */
@@ -66,6 +59,7 @@ int main()
 	setlocale(LC_ALL, "RU");
 	double x_start = get_value("Введите(x_start) : ");
 	double x_finish = get_value("Введите(x_finish) : ");
+	double function(double x);
 	double step = get_step("Enter step: ");
 	for (double x = x_start; x - x_finish <= DBL_EPSILON; x += step)
 	{
@@ -76,7 +70,7 @@ int main()
 
 double function(double x)
 {
-	if (OOF == false)
+	if (x != 1 && x < -1)
 	{
 		errno = EIO;
 		perror("при этом x нет решений");
@@ -137,13 +131,4 @@ void check_range(double x_start, double x_finish, double step)
 		perror("ERROR");
 		abort();
 	}
-}
-
-bool OOF(double x)
-{
-	if (x != 1 && x < -1)
-	{
-		return true;
-	}
-	return false;
 }
