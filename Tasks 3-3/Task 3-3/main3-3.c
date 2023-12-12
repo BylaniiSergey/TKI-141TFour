@@ -48,7 +48,7 @@ double summ(double x);
  * @param x_start - число
  * @param x_finish - число
  */
-void check_range(double x_start, double x_finish);
+void check_range(double x_start, double x_finish, double step);
 
 /**
 * @brief Точка входа в программу
@@ -59,8 +59,8 @@ int main()
 	setlocale(LC_ALL, "RU");
 	double x_start = get_value("Введите(x_start) : ");
 	double x_finish = get_value("Введите(x_finish) : ");
-	double function(double x);
 	double step = get_step("Enter step: ");
+	check_range( x_start,  x_finish,  step);
 	for (double x = x_start; x - x_finish <= DBL_EPSILON; x += step)
 	{
 		printf("%lf\t%lf\t%lf\t\n", x, function(x), summ(x));
@@ -76,7 +76,7 @@ double function(double x)
 		perror("при этом x нет решений");
 		abort();
 	}
-	return (1 / 4) * log((1 + x) / (1 - x)) + (1 / 2) * atan(x);
+	return (0,25) * log((1 + x) / (1 - x)) + (0,5) * atan(x);
 }
 
 double get_s_i(double i, double x)
