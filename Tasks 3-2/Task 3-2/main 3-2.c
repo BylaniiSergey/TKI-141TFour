@@ -66,7 +66,7 @@ int get_count()
 	int count;
 	int result = scanf_s("%d", &count);
 
-	if (result != 1 || count <= 1)
+	if (result != 1 || count == 1)
 	{
 		errno = EIO;
 		perror("Ошибка ввода");
