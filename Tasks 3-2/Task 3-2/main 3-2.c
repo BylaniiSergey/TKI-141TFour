@@ -81,7 +81,7 @@ double get_epsilon()
 	double epsilon;
 	int result = scanf_s("%lf", &epsilon);
 
-	if (result != 1 || epsilon >= -DBL_MIN)
+	if (result != 1 || epsilon >= DBL_MIN)
 	{
 		errno = EIO;
 		perror("Ошибка ввода");
