@@ -48,9 +48,10 @@ void fill_keyboard(const size_t size, int* array, int minimum_limit, int maximum
 * @brief Функция заполняющая массив рандомными числами
 * @param size - размер массива
 * @param array - массив
-* @return 1 если все хорошо
+* @param minimum_limit - граница снизу
+* @param maximum_limit - граница сверху
 */
-void fill_random(const size_t size, int* array,int minimum_limit,int maximum_limit);
+void fill_random(const size_t size, int* array, int minimum_limit, int maximum_limit);
 
 /**
 * @brief Функция выводящая заполненный массив
@@ -71,6 +72,7 @@ int get_value(const char* message);
 * @param size - размер массива
 * @param array - массив
 * @param checkSum - сумма которой равны два соседних элемента
+* @return  Возвращает true если сумма элементов в паре равна checkSum, иначе false
 */
 bool is_coulple_sum(const size_t size, const int* array, int checkSum);
 
@@ -78,7 +80,6 @@ bool is_coulple_sum(const size_t size, const int* array, int checkSum);
 * @brief Функция печатает есть ли пары массива 
 * @param size - размер массива
 * @param array - массив
-* @param checkSum - сумма которой равны два соседних элемента
 */
 void print_couples(const size_t size, const int* array);
 
@@ -100,8 +101,18 @@ enum random_or_keybord
 * @brief Функция запалняет массив случайными числами или числами с клавиатуры в зависимости от выбора пользователя
 * @param size - размер массива
 * @param array - массив
+* @param minimum_limit - граница снизу
+* @param maximum_limit - граница сверху
 */
-void fill_array(const size_t size, int* array);
+void fill_array(const size_t size, int* array, int minimum_limit, int maximum_limit);
+
+/**
+* @brief Функция проверяет что верхняя граница больше нижней
+* @param minimum_limit - нижняя граница
+* @param maximum_limit - верхняя граница
+* @return Возвращает true если верхняя граница больше нижней, иначе false
+*/
+bool checklimit(int minimum_limit, int maximum_limit);
 
 /**
 * @brief Точка входа в программу
@@ -113,14 +124,18 @@ int main()
 
     size_t size = get_size("Введите размер массива: ");
     int* arr = init_array(size);
-    fill_array(size, arr);
     const int minimum_limit = get_value("Введите нижнюю границу массива: ");
     const int maximum_limit = get_value("Введите верхнюю границу массива: ");
+    fill_array(size, arr, minimum_limit, maximum_limit);
+
     puts("Исходный массив: \n");
     print_array(size, arr);
+
     print_array(size, replace_last_k(arr, size));
+
     print_indexes_3(arr, size);
 
+    int checkSum = get_value("Введите сумму элементов: ");
     print_couples(size, arr);
 
     return 0;
@@ -134,6 +149,7 @@ void names_of_random_and_keyboard()
 
 int* replace_last_k(const int* const arr, size_t size) 
 {
+    size_t k = get_size("Введите k: ");
     int* arr_k = init_array(size);
     memcpy(arr_k, arr, size * sizeof(int));
     for (size_t i = size ; i < size; ++i) 
@@ -159,16 +175,14 @@ int* init_array(const size_t size)
     int* arr = malloc(size * sizeof(int));
     if (arr == NULL)
     {
-        perror("Неудалось выделить память под массив!\n");
+        perror("Не удалось выделить память под массив!\n");
         abort();
     }
     return arr;
 }
 
-void fill_array(const size_t size, int* array)
+void fill_array(const size_t size, int* array, int minimum_limit, int maximum_limit)
 {
-    const int minimum_limit = get_value("Введите нижнюю границу массива: ");
-    const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     puts("Как Вы хотите заполнить массив:\n");
     names_of_random_and_keyboard();
     enum random_or_keyboard choice = (enum random_or_keyboard)get_value("Введите нужный элемент: ");
@@ -187,7 +201,7 @@ void fill_array(const size_t size, int* array)
 
 void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_limit)
 {
-    if (minimum_limit >= maximum_limit)
+    if (checklimit( minimum_limit, maximum_limit))
     {
         errno = EIO;
         perror("Неверные границы масив");
@@ -268,7 +282,8 @@ bool is_coulple_sum(const size_t size, const int* array, int checkSum)
 
 void print_couples(const size_t size, const int* array)
 {
-    if (is_couple_sum(size, array)) 
+    int checkSum = get_value("Введите сумму элементов: ");
+    if (is_coulple_sum( size, array,  checkSum))
     {
         puts("Присутствуют\n");
     }
@@ -276,4 +291,12 @@ void print_couples(const size_t size, const int* array)
     {
         puts("Отсутствуют\n");
     }
+}
+bool checklimit(int minimum_limit, int maximum_limit)
+{
+    if (minimum_limit >= maximum_limit)
+    {
+        return false;
+    }
+    return true;
 }
