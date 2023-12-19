@@ -181,7 +181,7 @@ bool OOF(double x)
 
 bool checke(double a, double e)
 {
-	if (e<=DBL_EPSILON || e>=fabs(a) )
+	if (e<=DBL_EPSILON || e > fabs(a) + DBL_EPSILON)
 	{
 		return false;
 	}
