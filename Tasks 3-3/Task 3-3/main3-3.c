@@ -82,9 +82,9 @@ int main()
 
 	double a = get_value("Введите(a) : ");
 	double b = get_value("Введите(b) : ");
+	checkvars(a, b);
 	double e = get_value("Введите(e) : ");
 	checke(a, e);
-	checkvars(a, b);
 	double step = get_step("Введите(step): ");
 	checkstep(step);
 	for (double x = a; x - b <= DBL_EPSILON; x += step)
@@ -111,7 +111,7 @@ double summ(double x, double e)
 	double sum = 0;
 	double s_i = function_2(x, 1);
 	sum += 0;
-	for (int i = 0; fabs(function_1(x) - sum) <= e + DBL_EPSILON; i++)
+	for (int i = 0; function_1(x) - sum <= e + DBL_EPSILON; i++)
 	{
 		s_i += function_2(x, i);
 		sum += s_i;
