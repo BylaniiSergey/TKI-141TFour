@@ -23,9 +23,10 @@ double function_1(double x);
 /**
  * @brief Функция возвращающая значение суммы ряда в этой точке
  * @param x - точка
+ * @param e - точка
  * @return Возвращает sum
  */
-double summ(double x);
+double summ(double x, double e);
 
 /**
  * @brief Функция возвращающая значение функции в данной точке
@@ -74,6 +75,7 @@ int main()
 
 	double a = get_value("Введите(a) : ");
 	double b = get_value("Введите(b) : ");
+	double e = get_value("Введите(e) : ");
 	checkvars(a, b);
 	double step = get_step("Введите(step): ");
 	checkstep(step);
@@ -81,7 +83,7 @@ int main()
 	{
 		if (OOF(x))
 		{
-			printf_s("%lf\t%lf\t%lf\t\n", x, function_1(x), summ(x));
+			printf_s("%lf\t%lf\t%lf\t\n", x, function_1(x), summ(x,e));
 		}
 		else
 		{
@@ -96,14 +98,12 @@ double function_1(double x)
 	return (0.25) * log((1 + x) / (1 - x)) + (0.5) * atan(x);
 }
 
-double summ(double x)
+double summ(double x, double e)
 {
-	double e = pow(30, -5);
 	double sum = 0;
-	int i = 1;
-	double s_i = function_2(x, i);
+	double s_i = function_2(x, 1);
 	sum += 0;
-	for (int i = 0; fabs(function_1(x) - sum) <= DBL_EPSILON; i++)
+	for (int i = 0; fabs(function_1(x) - sum) <= e + DBL_EPSILON; i++)
 	{
 		s_i += function_2(x, i);
 		sum += s_i;
@@ -146,7 +146,7 @@ double get_value(const char* message)
 
 bool checkvars(double a, double b)
 {
-	if (a - b >= DBL_EPSILON)
+	if (a - b >= -DBL_EPSILON)
 	{
 		return false;
 	}
@@ -164,7 +164,7 @@ bool checkstep(double step)
 
 bool OOF(double x)
 {
-	if (x - 1 <= DBL_EPSILON && ((1 + x) / (1 - x)) <= DBL_EPSILON)
+	if (fabs(x - 1) <= DBL_EPSILON || ((1 + x) / (1 - x)) <= DBL_EPSILON)
 	{
 		return false;
 	}
