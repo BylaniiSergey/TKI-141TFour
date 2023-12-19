@@ -23,10 +23,10 @@ double function_1(double x);
 /**
  * @brief Функция возвращающая значение суммы ряда в этой точке
  * @param x - точка
- * @param e - точка
+ * @param a - точка начала
  * @return Возвращает sum
  */
-double summ(double x, double e);
+double summ(double a, double e);
 
 /**
  * @brief Функция возвращающая значение функции в данной точке
@@ -59,6 +59,13 @@ bool checkvars(double a, double b);
 bool checkstep(double step);
 
 /**
+ * @brief Функция проверяет e
+ * @param e - число
+ * @return Возвращает true если e больше 0, иначе false
+ */
+bool checke(double x, double e);
+
+/**
  * @brief Область определения функции
  * @param x - точка
  * @return Возвращает true если x принадлежит ООФ, иначе false
@@ -76,6 +83,7 @@ int main()
 	double a = get_value("Введите(a) : ");
 	double b = get_value("Введите(b) : ");
 	double e = get_value("Введите(e) : ");
+	checke(a, e);
 	checkvars(a, b);
 	double step = get_step("Введите(step): ");
 	checkstep(step);
@@ -165,6 +173,15 @@ bool checkstep(double step)
 bool OOF(double x)
 {
 	if (fabs(x - 1) <= DBL_EPSILON || ((1 + x) / (1 - x)) <= DBL_EPSILON)
+	{
+		return false;
+	}
+	return true;
+}
+
+bool checke(double a, double e)
+{
+	if (e<=DBL_EPSILON || e>=fabs(a) )
 	{
 		return false;
 	}
