@@ -1,6 +1,5 @@
 #include <memory.h>
 #include <stdlib.h>
-#include <math.h>
 #include <float.h>
 #include <errno.h>
 #include <time.h>
@@ -115,6 +114,12 @@ void fill_array(const size_t size, int* array, int minimum_limit, int maximum_li
 bool checklimit(int minimum_limit, int maximum_limit);
 
 /**
+* @brief Функция удаляющая массив
+* @param array - массив
+*/
+void delete_array(int* arr);
+
+/**
 * @brief Точка входа в программу
 * @return Возврящает 0, если программа работает верно, иначе 1
 */
@@ -131,12 +136,15 @@ int main()
     puts("Исходный массив: \n");
     print_array(size, arr);
 
-    print_array(size, replace_last_k(arr, size));
+    int* second_array = replace_last_k(arr, size);
+    print_array(size, second_array);
 
     print_indexes_3(arr, size);
 
     int checkSum = get_value("Введите сумму элементов: ");
     print_couples(size, arr);
+    delete_array(arr);
+    delete_array(second_array);
 
     return 0;
 }
@@ -186,7 +194,8 @@ void fill_array(const size_t size, int* array, int minimum_limit, int maximum_li
     puts("Как Вы хотите заполнить массив:\n");
     names_of_random_and_keyboard();
     enum random_or_keyboard choice = (enum random_or_keyboard)get_value("Введите нужный элемент: ");
-    switch (choice) {
+    switch (choice) 
+    {
     case Keyboard:
         fill_keyboard(size, array, minimum_limit, maximum_limit);
         break;
@@ -294,9 +303,13 @@ void print_couples(const size_t size, const int* array)
 }
 bool checklimit(int minimum_limit, int maximum_limit)
 {
-    if (minimum_limit >= maximum_limit)
+    return minimum_limit >= maximum_limit;
+}
+
+void delete_array(int* arr)
+{
+    if (arr != NULL)
     {
-        return false;
+        free(arr);
     }
-    return true;
 }
