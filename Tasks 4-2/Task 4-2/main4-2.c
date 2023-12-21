@@ -1,6 +1,5 @@
 #include <memory.h>
 #include <stdlib.h>
-#include <math.h>
 #include <float.h>
 #include <errno.h>
 #include <time.h>
@@ -106,6 +105,12 @@ size_t find_index_last_divisible(const int* const array, size_t size);
 int* get_array_A(const int* const array, size_t size);
 
 /**
+* @brief Функция удаляющая массив
+* @param array - массив
+*/
+void delete_array(int* array);
+
+/**
 * @brief Точка входа в программу
 * @return Возврящает 0, если программа работает верно, иначе 1
 */
@@ -134,6 +139,7 @@ int main()
 
 	puts("Массив A, сформированный из исходного массива D по 3-му условию:\n");
 	print_array(size, A_array);
+	delete_array(array);
 
 	return 0;
 }
@@ -309,4 +315,12 @@ int* get_array_A(const int* const array, size_t size)
 		}
 	}
 	return new_array;
+}
+
+void delete_array(int* array)
+{
+	if (array != NULL)
+	{
+		free(array);
+	}
 }
