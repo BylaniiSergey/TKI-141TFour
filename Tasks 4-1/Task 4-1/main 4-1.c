@@ -213,10 +213,10 @@ void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_l
     if (checklimit( minimum_limit, maximum_limit))
     {
         errno = EIO;
-        perror("Неверные границы масив");
+        perror("Неверные границы массива");
         abort();
     }
-    puts("Введите массива: ");
+    puts("Введите массив: ");
     for (size_t i = 0; i < size; i++)
     {
         int c = get_value("");
@@ -301,6 +301,7 @@ void print_couples(const size_t size, const int* array)
         puts("Отсутствуют\n");
     }
 }
+
 bool checklimit(int minimum_limit, int maximum_limit)
 {
     return minimum_limit >= maximum_limit;
