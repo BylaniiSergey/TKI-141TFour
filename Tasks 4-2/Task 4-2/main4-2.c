@@ -139,7 +139,11 @@ int main()
 
 	puts("Массив A, сформированный из исходного массива D по 3-му условию:\n");
 	print_array(size, A_array);
+
 	delete_array(array);
+	delete_array(array_with_inserted_k);
+	delete_array(A_array);
+	delete_array(array_with_replaced_first_negative);
 
 	return 0;
 }
@@ -153,7 +157,8 @@ void names_of_random_and_keyboard()
 size_t get_size(char const* message)
 {
 	int size = get_value(message);
-	if (size < 0) {
+	if (size < 0) 
+	{
 		perror("Неверный массив!\n");
 		abort();
 	}
