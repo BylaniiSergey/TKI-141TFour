@@ -300,7 +300,8 @@ int get_value(const char* message)
 
 void delete_array(int** arr, size_t n)
 {
-    if (arr != NULL) {
+    if (arr != NULL) 
+    {
         for (size_t i = 0; i < n; ++i)
         {
             if (arr[i] != NULL) {
@@ -411,7 +412,8 @@ int** insert_max(const int* const* const arr, size_t n, size_t m)
 {
     int** new_arr = init_array_of_ptrs(n);
     size_t index = find_last_max_column_index(arr, n, m);
-    for (size_t i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n; ++i) 
+    {
         new_arr[i] = insert_to_string(arr[i], m, 0, index);
     }
     return new_arr;
