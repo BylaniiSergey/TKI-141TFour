@@ -1,6 +1,5 @@
 #include <memory.h>
 #include <stdlib.h>
-#include <float.h>
 #include <errno.h>
 #include <time.h>
 #include <stdio.h>
@@ -80,33 +79,33 @@ int get_value(const char* message);
 * @param array - массив
 * @param n - количество строк
 */
-void delete_array(int** arr, size_t n);
+void delete_array(int*** arr, size_t n);
 
 /**
 * @brief Функция которая ищет максимальное значение в строке массива
-* @param array_string - строка массива
-* @param m - количество столбцов
+* @param row - строка массива
+* @param columns - количество столбцов
 * @return Максимальное значение в строке массива
 */
-int find_max_in_string(int const* const array_string, size_t m);
+int find_max_in_row(int const* const row, size_t columns);
 
 /**
 * @brief Функция копирующая массив
 * @param arr - массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @return Возвращает копию массива
 */
-int** copy_array(const int* const* const arr, size_t n, size_t m);
+int** copy_array(const int* const* const arr, size_t row, size_t columns);
 
 /**
 * @brief Заминить максимальный элемент в каждой строке на противоположный по знаку
 * @param arr - массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param rows - количество строк
+* @param columns - количество столбцов
 * @return Возвращает изменённый массив
 */
-int** replace_max_in_each_string(const int* const* const arr, size_t n, size_t m);
+int** replace_max_in_each_row(const int* const* const array, size_t rows, size_t columns);
 
 /**
 * @brief Функция создаёт одномерный массив размером m
@@ -286,25 +285,26 @@ void print_array(const int* const* array, size_t n, size_t m)
 
 int get_value(const char* message)
 {
-    int a;
+    int value;
     printf_s("%s", message);
-    int res = scanf_s("%d", &a);
+    int res = scanf_s("%d", &value);
     if (res != 1)
     {
         errno = EIO;
         perror("Неверное значение\n");
         abort();
     }
-    return a;
+    return value;
 }
 
-void delete_array(int** arr, size_t n)
+void delete_array(int*** arr, size_t n)
 {
     if (arr != NULL) 
     {
         for (size_t i = 0; i < n; ++i)
         {
-            if (arr[i] != NULL) {
+            if (arr[i] != NULL)
+            {
                 free(arr[i]);
             }
         }
@@ -312,36 +312,36 @@ void delete_array(int** arr, size_t n)
     }
 }
 
-int find_max_in_string(int const* const array_string, size_t m)
+int find_max_in_row(int const* const row, size_t columns)
 {
-    int max = array_string[0];
-    for (size_t i = 1; i < m; ++i)
+    int max = row[0];
+    for (size_t i = 1; i < columns; ++i)
     {
-        if (array_string[i] > max)
+        if (row[i] > max)
         {
-            max = array_string[i];
+            max = row[i];
         }
     }
     return max;
 }
 
-int** copy_array(const int* const* const arr, size_t n, size_t m)
+int** copy_array(const int* const* const arr, size_t rows, size_t columns)
 {
-    int** new_arr = init_array(n, m);
-    for (size_t i = 0; i < n; ++i)
+    int** new_arr = init_array(rows, columns);
+    for (size_t i = 0; i < rows; ++i)
     {
-        memcpy(new_arr[i], arr[i], m * sizeof(int));
+        memcpy(new_arr[i], arr[i], columns * sizeof(int));
     }
     return new_arr;
 }
 
-int** replace_max_in_each_string(const int* const* const arr, size_t n, size_t m)
+int** replace_max_in_each_row(const int* const* const array, size_t rows, size_t columns)
 {
-    int** tmp = copy_array(arr, n, m);
-    for (size_t i = 0; i < n; ++i)
+    int** tmp = copy_array(array, rows, columns);
+    for (size_t i = 0; i < rows; ++i)
     {
-        int max_in_string = find_max_in_string(tmp[i], m);
-        for (size_t j = 0; j < m; ++j)
+        int max_in_string = find_max_in_string(tmp[i], columns);
+        for (size_t j = 0; j < columns; ++j)
         {
             if (tmp[i][j] == max_in_string)
             {
@@ -399,12 +399,23 @@ int** init_array_of_ptrs(size_t n)
     return ptr_array;
 }
 
+void copy(int* dst, int* src, size_t size)
+{
+    if (dst != NULL && src != NULL)
+    {
+        for (size_t i = 0; i < size; ++i)
+        {
+            dst[i] = src[i];
+        }
+    }
+}
+
 int* insert_to_string(const int* const array_string, size_t m, int elem, size_t index)
 {
     int* new_array_string = init_single_array(m + 1);
-    memcpy(new_array_string, array_string, (index + 1) * sizeof(int));
+    copy(new_array_string, array_string, index + 1);
     new_array_string[index + 1] = elem;
-    memcpy(new_array_string + index + 2, array_string + index + 1, (m - index - 1) * sizeof(int));
+    copy(new_array_string + index + 2, array_string + index + 1, m - index - 1);
     return new_array_string;
 }
 
