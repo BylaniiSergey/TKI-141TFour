@@ -117,7 +117,6 @@ int main()
 	setlocale(LC_ALL, "RU");
 
 	size_t size = get_size("Введите размер массива: ");
-
 	int* array = init_array(size);
 	fill_array(size, array);
 
