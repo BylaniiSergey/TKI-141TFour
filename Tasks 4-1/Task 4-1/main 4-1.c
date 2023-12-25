@@ -131,6 +131,7 @@ int main()
     int* arr = init_array(size);
     const int minimum_limit = get_value("Введите нижнюю границу массива: ");
     const int maximum_limit = get_value("Введите верхнюю границу массива: ");
+    checklimit(minimum_limit, maximum_limit);
     fill_array(size, arr, minimum_limit, maximum_limit);
 
     puts("Исходный массив: \n");
@@ -143,8 +144,8 @@ int main()
 
     int checkSum = get_value("Введите сумму элементов: ");
     print_couples(size, arr);
-    delete_array(arr);
     delete_array(second_array);
+    delete_array(arr);
 
     return 0;
 }
@@ -210,12 +211,6 @@ void fill_array(const size_t size, int* array, int minimum_limit, int maximum_li
 
 void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_limit)
 {
-    if (checklimit( minimum_limit, maximum_limit))
-    {
-        errno = EIO;
-        perror("Неверные границы массива");
-        abort();
-    }
     puts("Введите массив: ");
     for (size_t i = 0; i < size; i++)
     {
@@ -312,5 +307,6 @@ void delete_array(int* arr)
     if (arr != NULL)
     {
         free(arr);
+        arr = NULL;
     }
 }
