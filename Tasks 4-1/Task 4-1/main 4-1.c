@@ -1,6 +1,5 @@
 #include <memory.h>
 #include <stdlib.h>
-#include <float.h>
 #include <errno.h>
 #include <time.h>
 #include <stdio.h>
@@ -117,7 +116,7 @@ bool checklimit(int minimum_limit, int maximum_limit);
 * @brief Функция удаляющая массив
 * @param array - массив
 */
-void delete_array(int* arr);
+void delete_array(int** arr);
 
 /**
 * @brief Точка входа в программу
@@ -214,14 +213,14 @@ void fill_keyboard(const size_t size, int* array,int minimum_limit,int maximum_l
     puts("Введите массив: ");
     for (size_t i = 0; i < size; i++)
     {
-        int c = get_value("");
-        if (c < minimum_limit || c > maximum_limit)
+        int value = get_value("");
+        if (value < minimum_limit || value > maximum_limit)
         {
             errno = EIO;
             perror("Неверное значение");
             abort();
         }
-        array[i] = c;
+        array[i] = value;
     }
 }
 
@@ -245,16 +244,16 @@ void print_array(const size_t size, const int* array)
 
 int get_value(const char* message)
 {
-    int a;
+    int value;
     printf_s("%s", message);
-    int res = scanf_s("%d", &a);
+    int res = scanf_s("%d", &value);
     if (res != 1)
     {
         errno = EIO;
         perror("Ошибка ввода");
         abort();
     }
-    return a;
+    return value;
 }
 
 void print_indexes_3(const int* const arr, size_t size)
@@ -302,11 +301,11 @@ bool checklimit(int minimum_limit, int maximum_limit)
     return minimum_limit >= maximum_limit;
 }
 
-void delete_array(int* arr)
+void delete_array(int** arr)
 {
     if (arr != NULL)
     {
         free(arr);
-        arr = NULL;
     }
+    arr = NULL;
 }
