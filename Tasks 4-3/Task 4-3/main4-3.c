@@ -29,43 +29,42 @@ size_t get_size(char const* message);
 
 /**
 * @brief Функция выделяющая память под двумерный массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @return Массив
 */
-int** init_array(const size_t n, const size_t m);
+int** init_array(const size_t row, const size_t columns);
 
 /**
 * @brief Функция заполняет массив случайными числами или числами с клавиатуры в зависимости от выбора пользователя
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @param array - массив
 */
-void fill_array(int** array, size_t n, size_t m);
+void fill_array(int** array, size_t row, size_t columns);
 
 /**
 * @brief Функция считывающая ввод с клавиатуры
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @param array - массив
 */
-void fill_keyboard(int** array, size_t n, size_t m);
+void fill_keyboard(int** array, size_t row, size_t columns);
 
 /**
 * @brief Функция заполняющая массив рандомными числами
-* @param n - количество строк
-* @param m - количество столбцов
-* @return 1 если все хорошо
+* @param row - количество строк
+* @param columns - количество столбцов
 */
-void fill_random(int** array, const size_t n, const size_t m);
+void fill_random(int** array, const size_t row, const size_t columns);
 
 /**
 * @brief Функция выводящая заполненный массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @param array - массив
 */
-void print_array(const int* const* array, size_t n, size_t m);
+void print_array(const int* const* array, size_t row, size_t columns);
 
 /**
 * @brief Функция принимающая и проверяющая значение на ввод
@@ -77,9 +76,9 @@ int get_value(const char* message);
 /**
 * @brief Функция удаляющая массив
 * @param array - массив
-* @param n - количество строк
+* @param row - количество строк
 */
-void delete_array(int*** arr, size_t n);
+void delete_array(int*** arr, size_t row);
 
 /**
 * @brief Функция которая ищет максимальное значение в строке массива
@@ -101,53 +100,61 @@ int** copy_array(const int* const* const arr, size_t row, size_t columns);
 /**
 * @brief Заминить максимальный элемент в каждой строке на противоположный по знаку
 * @param arr - массив
-* @param rows - количество строк
+* @param row - количество строк
 * @param columns - количество столбцов
 * @return Возвращает изменённый массив
 */
-int** replace_max_in_each_row(const int* const* const array, size_t rows, size_t columns);
+int** replace_max_in_each_row(const int* const* const arr, size_t row, size_t columns);
 
 /**
 * @brief Функция создаёт одномерный массив размером m
-* @param m - количество столбцов
+* @param columns - количество столбцов
 * @return Возвращает созданный одномерный массив
 */
-int* init_single_array(size_t m);
+int* init_single_array(size_t columns);
 
 /**
 * @brief Функция ищет максимальный элемент
 * @param arr - массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @return Возвращает номер столбца максимального элемента
 */
-size_t find_last_max_column_index(const int* const* const arr, size_t n, size_t m);
+size_t find_last_max_column_index(const int* const* const arr, size_t row, size_t columns);
 
 /**
 * @brief Функция вставляет элемент в строку массива
-* @param array_string - строка массива
+* @param row - строка массива
 * @param elem - элемент который надо вставить
 * @param index - индекс после которго надо вставить элемент
-* @param m - количество столбцов
+* @param columns - количество столбцов
 * @return Возвращает изменённую строку массива
 */
-int* insert_to_string(const int* const array_string, size_t m, int elem, size_t index);
+int* insert_to_row(const int* const row, size_t columns, int elem, size_t index);
 
 /**
 * @brief Функция вставляющая после всех столбцов, содержащих максимальный элемент столбец из нулей
 * @param arr - массив
-* @param n - количество строк
-* @param m - количество столбцов
+* @param row - количество строк
+* @param columns - количество столбцов
 * @return Возвращает изменённый массив
 */
-int** insert_max(const int* const* const arr, size_t n, size_t m);
+int** insert_max(const int* const* const arr, size_t row, size_t columns);
 
 /**
 * @brief Функция выделяющая память под массив указателей
-* @param n - размер массива
+* @param row - размер массива
 * @return Возвращает массив указателей
 */
-int** init_array_of_ptrs(size_t n);
+int** init_array_of_ptrs(size_t row);
+
+/**
+* @brief Функция копирующая массив src в массив dst размера size
+* @param size - размер массивов
+* @param dst - массив назначения
+* @param src - исходный массив
+*/
+void copy(int* dst, int* src, size_t size);
 
 /**
 * @brief Точка входа в программу
@@ -156,26 +163,26 @@ int** init_array_of_ptrs(size_t n);
 int main() {
     setlocale(LC_ALL, "RU");
 
-    size_t n = get_size("Введите количество строк в массиве: ");
-    size_t m = get_size("Введите количество столбцов в массиве: ");
+    size_t row = get_size("Введите количество строк в массиве: ");
+    size_t columns = get_size("Введите количество столбцов в массиве: ");
 
-    int** arr = init_array(n, m);
-    fill_array(arr, n, m);
+    int** arr = init_array(row, columns);
+    fill_array(arr, row, columns);
 
     puts("Исходный массив:\n");
-    print_array(arr, n, m);
-    int** first_arr = replace_max_in_each_string(arr, n, m);
+    print_array(arr, row, columns);
+    int** first_arr = replace_max_in_each_row(arr, row, columns);
 
     puts("Первое задание:\n");
-    print_array(first_arr, n, m);
-    int** second_arr = insert_max(arr, n, m);
+    print_array(first_arr, row, columns);
+    int** second_arr = insert_max(arr, row, columns);
 
     puts("Второе задание:\n");
-    print_array(second_arr, n, m + 1);
+    print_array(second_arr, row, columns + 1);
 
-    delete_array(arr, n);
-    delete_array(first_arr, n);
-    delete_array(second_arr, n);
+    delete_array(arr, row);
+    delete_array(first_arr, row);
+    delete_array(second_arr, row);
 
     return 0;
 }
@@ -197,21 +204,21 @@ size_t get_size(char const* message)
     return (size_t)size;
 }
 
-int** init_array(const size_t n, const size_t m)
+int** init_array(const size_t row, const size_t columns)
 {
-    int** arr = (int**)malloc(n * sizeof(int*));
+    int** arr = (int**)malloc(row * sizeof(int*));
     if (arr == NULL)
     {
         perror("Невозможно выделить память под массив!\n");
     }
-    for (size_t i = 0; i < n; ++i)
+    for (size_t i = 0; i < row; ++i)
     {
-        arr[i] = init_single_array(n);
+        arr[i] = init_single_array(row);
     }
     return arr;
 }
 
-void fill_array(int** array, size_t n, size_t m)
+void fill_array(int** array, size_t row, size_t columns)
 {
     puts("Как Вы хотите заполнить массив:\n");
     names_of_random_and_keyboard();
@@ -219,17 +226,17 @@ void fill_array(int** array, size_t n, size_t m)
     switch (choice)
     {
     case Keyboard:
-        fill_keyboard(array, n, m);
+        fill_keyboard(array, row, columns);
         break;
     case Random:
-        fill_random(array, n, m);
+        fill_random(array, row, columns);
         break;
     default:
         perror("Неверный выбор!!\n");
     }
 }
 
-void fill_keyboard(int** array, size_t n, size_t m)
+void fill_keyboard(int** array, size_t row, size_t columns)
 {
     const int minimum_limit = get_value("Введите нижнюю границу массива: ");
     const int maximum_limit = get_value("Введите верхнюю границу массива: ");
@@ -240,42 +247,42 @@ void fill_keyboard(int** array, size_t n, size_t m)
         abort();
     }
     puts("Введите массив: ");
-    for (size_t i = 0; i < n; i++)
+    for (size_t i = 0; i < row; i++)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
-            int c = get_value("");
-            if (c < minimum_limit || c > maximum_limit)
+            int value = get_value("");
+            if (value < minimum_limit || value > maximum_limit)
             {
                 errno = EIO;
                 perror("Ошибка ввода!\n");
                 abort();
             }
-            array[i][j] = c;
+            array[i][j] = value;
         }
     }
 }
 
-void fill_random(int** array, const size_t n, const size_t m)
+void fill_random(int** array, const size_t row, const size_t columns)
 {
     const int minimum_limit = get_value("Введите нижнюю границу массива: ");
     const int maximum_limit = get_value("Введите верхнюю границу массива: ");
     unsigned int ttime = time(NULL);
     srand(ttime);
-    for (size_t i = 0; i < n; i++)
+    for (size_t i = 0; i < row; i++)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
             array[i][j] = minimum_limit + rand() % (maximum_limit - minimum_limit + 1);
         }
     }
 }
 
-void print_array(const int* const* array, size_t n, size_t m)
+void print_array(const int* const* array, size_t row, size_t columns)
 {
-    for (size_t i = 0; i < n; i++)
+    for (size_t i = 0; i < row; i++)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
             printf_s("%d\t", array[i][j]);
         }
@@ -297,11 +304,10 @@ int get_value(const char* message)
     return value;
 }
 
-void delete_array(int*** arr, size_t n)
+void delete_array(int*** arr, size_t row)
 {
-    if (arr != NULL) 
-    {
-        for (size_t i = 0; i < n; ++i)
+    if (arr != NULL) {
+        for (size_t i = 0; i < row; ++i)
         {
             if (arr[i] != NULL)
             {
@@ -325,22 +331,22 @@ int find_max_in_row(int const* const row, size_t columns)
     return max;
 }
 
-int** copy_array(const int* const* const arr, size_t rows, size_t columns)
+int** copy_array(const int* const* const arr, size_t row, size_t columns)
 {
-    int** new_arr = init_array(rows, columns);
-    for (size_t i = 0; i < rows; ++i)
+    int** new_arr = init_array(row, columns);
+    for (size_t i = 0; i < row; ++i)
     {
         memcpy(new_arr[i], arr[i], columns * sizeof(int));
     }
     return new_arr;
 }
 
-int** replace_max_in_each_row(const int* const* const array, size_t rows, size_t columns)
+int** replace_max_in_each_row(const int* const* const arr, size_t row, size_t columns)
 {
-    int** tmp = copy_array(array, rows, columns);
-    for (size_t i = 0; i < rows; ++i)
+    int** tmp = copy_array(arr, row, columns);
+    for (size_t i = 0; i < row; ++i)
     {
-        int max_in_string = find_max_in_string(tmp[i], columns);
+        int max_in_string = find_max_in_row(tmp[i], columns);
         for (size_t j = 0; j < columns; ++j)
         {
             if (tmp[i][j] == max_in_string)
@@ -352,9 +358,9 @@ int** replace_max_in_each_row(const int* const* const array, size_t rows, size_t
     return tmp;
 }
 
-int* init_single_array(size_t m)
+int* init_single_array(size_t columns)
 {
-    int* array_string = malloc(m * sizeof(int));
+    int* array_string = malloc(columns * sizeof(int));
     if (array_string == NULL)
     {
         perror("Невозможно выделить память под массив!\n");
@@ -362,12 +368,12 @@ int* init_single_array(size_t m)
     return array_string;
 }
 
-size_t find_last_max_column_index(const int* const* const arr, size_t n, size_t m)
+size_t find_last_max_column_index(const int* const* const arr, size_t row, size_t columns)
 {
     int max = arr[0][0];
-    for (size_t i = 0; i < n; ++i)
+    for (size_t i = 0; i < row; ++i)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
             if (arr[i][j] >= max)
             {
@@ -376,9 +382,9 @@ size_t find_last_max_column_index(const int* const* const arr, size_t n, size_t 
         }
     }
     size_t column_index = 0;
-    for (size_t i = 0; i < n; ++i)
+    for (size_t i = 0; i < row; ++i)
     {
-        for (size_t j = 0; j < m; ++j)
+        for (size_t j = 0; j < columns; ++j)
         {
             if (arr[i][j] == max && j > column_index)
             {
@@ -389,9 +395,9 @@ size_t find_last_max_column_index(const int* const* const arr, size_t n, size_t 
     return column_index;
 }
 
-int** init_array_of_ptrs(size_t n)
+int** init_array_of_ptrs(size_t row)
 {
-    int** ptr_array = (int**)malloc(n * sizeof(int*));
+    int** ptr_array = (int**)malloc(row * sizeof(int*));
     if (ptr_array == NULL)
     {
         perror("Невозможно выделить память под массив!\n");
@@ -410,22 +416,21 @@ void copy(int* dst, int* src, size_t size)
     }
 }
 
-int* insert_to_string(const int* const array_string, size_t m, int elem, size_t index)
+int* insert_to_row(const int* const row, size_t columns, int elem, size_t index)
 {
-    int* new_array_string = init_single_array(m + 1);
-    copy(new_array_string, array_string, index + 1);
+    int* new_array_string = init_single_array(columns + 1);
+    copy(new_array_string, row, index + 1);
     new_array_string[index + 1] = elem;
-    copy(new_array_string + index + 2, array_string + index + 1, m - index - 1);
+    copy(new_array_string + index + 2, row + index + 1, columns - index - 1);
     return new_array_string;
 }
 
-int** insert_max(const int* const* const arr, size_t n, size_t m)
+int** insert_max(const int* const* const arr, size_t row, size_t columns)
 {
-    int** new_arr = init_array_of_ptrs(n);
-    size_t index = find_last_max_column_index(arr, n, m);
-    for (size_t i = 0; i < n; ++i) 
-    {
-        new_arr[i] = insert_to_string(arr[i], m, 0, index);
+    int** new_arr = init_array_of_ptrs(row);
+    size_t index = find_last_max_column_index(arr, row, columns);
+    for (size_t i = 0; i < row; ++i) {
+        new_arr[i] = insert_to_row(arr[i], columns, 0, index);
     }
     return new_arr;
 }
