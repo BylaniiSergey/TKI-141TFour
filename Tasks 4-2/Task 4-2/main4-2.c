@@ -1,6 +1,5 @@
 #include <memory.h>
 #include <stdlib.h>
-#include <float.h>
 #include <errno.h>
 #include <time.h>
 #include <stdio.h>
@@ -53,16 +52,15 @@ void fill_keyboard(const size_t size, int* array);
 * @brief Функция заполняющая массив рандомными числами
 * @param size - размер массива
 * @param array - массив
-* @return 1 если все хорошо
 */
-int fill_random(const size_t size, int* array);
+void fill_random(const size_t size, int* array);
 
 /**
 * @brief Функция выводящая заполненный массив
 * @param size - размер массива
 * @param array - массив
 */
-int print_array(const size_t size, const int* array);
+void print_array(const size_t size, const int* array);
 
 /**
 * @brief Функция принимающая и проверяющая значение на ввод
@@ -108,7 +106,7 @@ int* get_array_A(const int* const array, size_t size);
 * @brief Функция удаляющая массив
 * @param array - массив
 */
-void delete_array(int* array);
+void delete_array(int** array);
 
 /**
 * @brief Точка входа в программу
@@ -218,7 +216,7 @@ void fill_keyboard(const size_t size, int* array)
 	}
 }
 
-int fill_random(const size_t size, int* array)
+void fill_random(const size_t size, int* array)
 {
 	const int minimum_limit = get_value("Введите нижнюю границу массива: ");
 	const int maximum_limit = get_value("Введите верхнюю границу массива: ");
@@ -228,30 +226,28 @@ int fill_random(const size_t size, int* array)
 	{
 		array[i] = minimum_limit + rand() % (maximum_limit - minimum_limit + 1);
 	}
-	return 1;
 }
 
-int print_array(const size_t size, const int* array)
+void print_array(const size_t size, const int* array)
 {
 	for (size_t i = 0; i < size; i++)
 	{
 		printf_s("%Iu\t%d\n", i, array[i]);
 	}
-	return 1;
 }
 
 int get_value(const char* message)
 {
-	int a;
+	int value;
 	printf_s("%s", message);
-	int res = scanf_s("%d", &a);
+	int res = scanf_s("%d", &value);
 	if (res != 1)
 	{
 		errno = EIO;
 		perror("Неверное значение\n");
 		abort();
 	}
-	return a;
+	return value;
 }
 
 int* replace_first_negative(const int* const array, size_t size)
@@ -299,9 +295,15 @@ int* insert_k(const int* const array, size_t size, int k)
 		perror("Индекс последнего кратного элемента массива больше размера массива!\n");
 		abort();
 	}
-	memcpy(new_array, array, (last_divisible_index + 1) * sizeof(int));
+	for (size_t i = 0; i < last_divisible_index + 1; ++i)
+	{
+		new_array[i] = array[i];
+	}
 	new_array[last_divisible_index + 1] = k;
-	memcpy((new_array + (last_divisible_index + 2)), (array + last_divisible_index + 1), (size - last_divisible_index - 1) * sizeof(int));
+	for (size_t i = last_divisible_index + 1; i < size - last_divisible_index - 1; ++i)
+	{
+		new_array[i + 1] = array[i];
+	}
 	return new_array;
 }
 
@@ -322,10 +324,11 @@ int* get_array_A(const int* const array, size_t size)
 	return new_array;
 }
 
-void delete_array(int* array)
+void delete_array(int** array)
 {
 	if (array != NULL)
 	{
 		free(array);
 	}
+	array = NULL;
 }
