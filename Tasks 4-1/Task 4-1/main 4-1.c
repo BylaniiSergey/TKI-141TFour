@@ -139,12 +139,12 @@ int main()
 
     int* second_array = replace_last_k(arr, size);
     print_array(size, second_array);
+    delete_array(second_array);
 
     print_indexes_3(arr, size);
 
     int checkSum = get_value("Введите сумму элементов: ");
     print_couples(size, arr);
-    delete_array(second_array);
     delete_array(arr);
 
     return 0;
@@ -161,7 +161,7 @@ int* replace_last_k(const int* const arr, size_t size)
     size_t k = get_size("Введите k: ");
     int* arr_k = init_array(size);
     memcpy(arr_k, arr, size * sizeof(int));
-    for (size_t i = size ; i < size; ++i) 
+    for (size_t i = size - 1; i >= size - 1 - k; ++i)
     {
         arr_k[i] = -arr_k[i];
     }
