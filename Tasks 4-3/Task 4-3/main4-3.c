@@ -179,9 +179,9 @@ int main() {
     puts("Второе задание:\n");
     print_array(second_arr, row, columns + 1);
 
-    delete_array(arr, row);
-    delete_array(first_arr, row);
-    delete_array(second_arr, row);
+    delete_array(&arr, row);
+    delete_array(&first_arr, row);
+    delete_array(&second_arr, row);
 
     return 0;
 }
