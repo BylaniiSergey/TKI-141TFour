@@ -305,7 +305,8 @@ int get_value(const char* message)
 
 void delete_array(int*** arr, size_t row)
 {
-    if (arr != NULL) {
+    if (arr != NULL) 
+    {
         for (size_t i = 0; i < row; ++i)
         {
             if (arr[i] != NULL)
@@ -346,10 +347,10 @@ int** replace_max_in_each_row(const int* const* const arr, size_t row, size_t co
     int** tmp = copy_array(arr, row, columns);
     for (size_t i = 0; i < row; ++i)
     {
-        int max_in_string = find_max_in_row(tmp[i], columns);
+        int max_in_row = find_max_in_row(tmp[i], columns);
         for (size_t j = 0; j < columns; ++j)
         {
-            if (tmp[i][j] == max_in_string)
+            if (tmp[i][j] == max_in_row)
             {
                 tmp[i][j] = -tmp[i][j];
             }
@@ -360,12 +361,12 @@ int** replace_max_in_each_row(const int* const* const arr, size_t row, size_t co
 
 int* init_single_array(size_t columns)
 {
-    int* array_string = malloc(columns * sizeof(int));
-    if (array_string == NULL)
+    int* array_row = malloc(columns * sizeof(int));
+    if (array_row == NULL)
     {
         perror("Невозможно выделить память под массив!\n");
     }
-    return array_string;
+    return array_row;
 }
 
 size_t find_last_max_column_index(const int* const* const arr, size_t row, size_t columns)
@@ -418,18 +419,19 @@ void copy(int* dst, int* src, size_t size)
 
 int* insert_to_row(const int* const row, size_t columns, int elem, size_t index)
 {
-    int* new_array_string = init_single_array(columns + 1);
-    copy(new_array_string, row, index + 1);
-    new_array_string[index + 1] = elem;
-    copy(new_array_string + index + 2, row + index + 1, columns - index - 1);
-    return new_array_string;
+    int* new_array_row = init_single_array(columns + 1);
+    copy(new_array_row, row, index + 1);
+    new_array_row[index + 1] = elem;
+    copy(new_array_row + index + 2, row + index + 1, columns - index - 1);
+    return new_array_row;
 }
 
 int** insert_max(const int* const* const arr, size_t row, size_t columns)
 {
     int** new_arr = init_array_of_ptrs(row);
     size_t index = find_last_max_column_index(arr, row, columns);
-    for (size_t i = 0; i < row; ++i) {
+    for (size_t i = 0; i < row; ++i) 
+    {
         new_arr[i] = insert_to_row(arr[i], columns, 0, index);
     }
     return new_arr;
