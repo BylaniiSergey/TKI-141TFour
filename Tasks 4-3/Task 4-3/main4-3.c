@@ -1,5 +1,4 @@
 #include <memory.h>
-#include <stdlib.h>
 #include <errno.h>
 #include <time.h>
 #include <stdio.h>
@@ -315,6 +314,7 @@ void delete_array(int*** arr, size_t row)
             }
         }
         free(arr);
+        arr = NULL;
     }
 }
 
