@@ -1,9 +1,9 @@
-#include <memory.h>
 #include <errno.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <locale.h>
+#include <stdlib.h>
 
 /**
 * @brief Пользовательский ввод
